@@ -40,22 +40,22 @@ int num_builtins() { return sizeof(builtin_str) / sizeof(char *); }             
 // Managing Jobs
 // =============
 typedef struct job {
-    pid_t pid;        // Process ID of the job
-    char state;       // 'R' for running, 'T' for suspended
-    char *command;    // Storing the command string
-    struct job *next; // Pointer to the next job in the list
-} job_t;                // Alias for struct job
-job_t *job_list = NULL; // Head of the job linked list
+    pid_t pid;            // Process ID of the job
+    char state;           // 'R' for running, 'T' for suspended
+    char *command;        // Storing the command string
+    struct job *next;     // Pointer to the next job in the list
+} job_t;                  // Alias for struct job
+job_t *job_list = NULL;   // Head of the job linked list
 
 void add_job(pid_t pid, char state, char *command) {
     job_t *new_job = malloc(sizeof(job_t)); // Create a new job node - allocate memory for that node
     // Allocates memory for a new job_t structure, new_job is a pointer to this memory
-    new_job->pid = pid;                 // Store the process ID
-    new_job->state = state;             // Store the state ('R' or 'T')
-    new_job->command = strdup(command); // Make a copy of the command string
+    new_job->pid = pid;                     // Store the process ID
+    new_job->state = state;                 // Store the state ('R' or 'T')
+    new_job->command = strdup(command);     // Make a copy of the command string
     // Insert at the beginning of the job list
-    new_job->next = job_list;           // Point new job to current first job
-    job_list = new_job;                 // Make new job the first job
+    new_job->next = job_list;              // Point new job to current first job
+    job_list = new_job;                    // Make new job the first job
 }
 
 void remove_job(pid_t pid) {
@@ -75,13 +75,13 @@ void remove_job(pid_t pid) {
 }
 
 void update_job_state(pid_t pid, char state) {
-    job_t *curr = job_list; // Start at the head of the job list
+    job_t *curr = job_list;      // Start at the head of the job list
     while (curr) {
         if (curr->pid == pid) {
             curr->state = state; // Update the state of the job
             return;
         }
-        curr = curr->next; // Move to the next job
+        curr = curr->next;       // Move to the next job
     }
 }
 
@@ -380,14 +380,7 @@ int dragon_launch(char **args, int background, char *infile, char *outfile, char
             tcsetpgrp(STDIN_FILENO, pid);
 
             int freed_cmd_str = 0;
-            
-            // // Wait for child to finish or stop
-            // waitpid(pid, &status, WUNTRACED);
-            // // Returns terminal control to shell
-            // tcsetpgrp(STDIN_FILENO, getpgrp());
-            // // Update child in process table
-            // // update_job_state(pid, status);
-
+        
             do {
                 waitpid(pid, &status, WUNTRACED); // wait until child stops or terminates
                 if (WIFSTOPPED(status)) {
