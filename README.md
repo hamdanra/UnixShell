@@ -38,7 +38,7 @@ Previous Implementation: https://github.com/nicehamburger/MySimpleShell
 - Output redirection: `> outfile`
 
 ### Pipes
-- Supports **single pipe** execution:
+- Supports single pipe execution:
 ```bash
 /bin/ls | /usr/bin/wc
 ```
