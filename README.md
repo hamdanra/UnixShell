@@ -50,15 +50,6 @@ Previous Implementation: https://github.com/nicehamburger/MySimpleShell
 - Each job runs in its own process group
 - Terminal control is correctly transferred for foreground jobs
 
-## Project Structure
-```bash
-UnixShell/
-├── src/
-│   └── dragonshell.c      # Main shell implementation
-├── Makefile               # Build configuration
-├── README.md              # Project documentation
-```
-
 ## Installation
 
 ### Prerequisites
