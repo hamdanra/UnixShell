@@ -546,14 +546,12 @@ int dragon_execute(char **args, char *line) {
             infile = args[i+1];
             free(args[i]);     // free "<"
             args[i] = NULL;    // mark as freed
-            // free(args[i+1]);// free filename
             args[i+1] = NULL;  // mark as freed
             i++;                // skip filename
         } else if (strcmp(args[i], ">") == 0 && args[i+1] != NULL) {
             outfile = args[i+1];
             free(args[i]);     // free ">"
             args[i] = NULL;    // mark as freed
-            // free(args[i+1]);// free filename
             args[i+1] = NULL;  // mark as freed
             i++;
         }
