@@ -1,4 +1,4 @@
-# Makefile for dragonshell
+# Makefile
 
 CC = gcc
 CFLAGS = -Wall
